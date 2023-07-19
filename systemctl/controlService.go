@@ -1,4 +1,4 @@
-package servicecontrol
+package systemctl
 
 import (
 	"github.com/jollaman999/utils/cmd"

@@ -7,10 +7,8 @@ import (
 	"syscall"
 )
 
-// IsModuleRunning : Check if module is running
-func IsModuleRunning(moduleName string) (running bool, pid int, err error) {
-	var PIDFile = "/run/" + moduleName + ".pid"
-
+// CheckRunningWithPIDFile : Check if process is running with PID file.
+func CheckRunningWithPIDFile(PIDFile string) (running bool, pid int, err error) {
 	if _, err := os.Stat(PIDFile); os.IsNotExist(err) {
 		return false, 0, nil
 	}
@@ -34,30 +32,11 @@ func IsModuleRunning(moduleName string) (running bool, pid int, err error) {
 	return false, 0, nil
 }
 
-// WriteHarpPID : Write harp PID to "/var/run/harp.pid"
-func WriteHarpPID(moduleName string) error {
-	var PIDFile = "/run/" + moduleName + ".pid"
-
+// WritePIDFile : Write PID file of currently running module.
+func WritePIDFile(PIDFile string) error {
 	pid := os.Getpid()
 
-	err := fileutil.CreateDirIfNotExist("/run")
-	if err != nil {
-		return err
-	}
-
-	err = fileutil.WriteFile(PIDFile, strconv.Itoa(pid))
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// DeleteHarpPID : Delete the harp PID file
-func DeleteHarpPID(moduleName string) error {
-	var PIDFile = "/run/" + moduleName + ".pid"
-
-	err := fileutil.DeleteFile(PIDFile)
+	err := fileutil.WriteFile(PIDFile, strconv.Itoa(pid))
 	if err != nil {
 		return err
 	}

@@ -14,6 +14,16 @@ func IsExist(fileLocation string) bool {
 	return true
 }
 
+// ReadFile : Read the file and returns it as a string
+func ReadFile(fileLocation string) (string, error) {
+	data, err := os.ReadFile(fileLocation)
+	if err != nil {
+		return "", err
+	}
+
+	return string(data), nil
+}
+
 // WriteFile : Write input string to fileLocation
 func WriteFile(fileLocation string, input string) error {
 	file, err := os.OpenFile(fileLocation, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)

@@ -4,6 +4,18 @@ import (
 	"testing"
 )
 
+func Test_ReadFile(t *testing.T) {
+	_, err := ReadFile("/proc/cpuinfo")
+	if err != nil {
+		t.Fatal("Failed to read file!")
+	}
+
+	_, err = ReadFile("/proc/abcdefghijklmnopqrstuvwxyz")
+	if err != nil {
+		t.Log("Tried to read file in /proc folder")
+	}
+}
+
 func Test_WriteFile(t *testing.T) {
 	err := WriteFile("/tmp/jolla_test_file", "test")
 	if err != nil {

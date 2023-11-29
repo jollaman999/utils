@@ -1,3 +1,7 @@
+// Run command for Linux & Unix like systems
+
+//go:build !windows
+
 package cmd
 
 import "testing"

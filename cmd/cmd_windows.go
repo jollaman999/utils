@@ -1,3 +1,7 @@
+// Run command for Windows
+
+//go:build windows
+
 package cmd
 
 import (
@@ -18,18 +22,10 @@ func runCMD(name string, arg ...string) error {
 	return nil
 }
 
-func RunSh(commandString string) error {
-	return runCMD("sh", "-c", commandString)
-}
-
-func RunBash(commandString string) error {
-	return runCMD("bash", "-c", commandString)
-}
-
-func RunZsh(commandString string) error {
-	return runCMD("zsh", "-c", commandString)
+func RunPowerShell(commandString string) error {
+	return runCMD("powershell.exe", "-Command", commandString)
 }
 
 func RunCMD(commandString string) error {
-	return RunSh(commandString)
+	return runCMD("cmd.exe", "/c", commandString)
 }

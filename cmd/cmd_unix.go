@@ -9,31 +9,31 @@ import (
 	"os/exec"
 )
 
-func runCMD(name string, arg ...string) error {
+func runCMD(name string, arg ...string) (output string, err error) {
 	cmd := exec.Command(name, arg...)
-	output, err := cmd.CombinedOutput()
+	outputBytes, err := cmd.CombinedOutput()
 	if err != nil {
-		if len(output) == 0 {
-			output = []byte(err.Error())
+		if len(outputBytes) == 0 {
+			outputBytes = []byte(err.Error())
 		}
-		return errors.New(string(output))
+		return string(outputBytes), errors.New(string(outputBytes))
 	}
 
-	return nil
+	return string(outputBytes), nil
 }
 
-func RunSh(commandString string) error {
+func RunSh(commandString string) (output string, err error) {
 	return runCMD("sh", "-c", commandString)
 }
 
-func RunBash(commandString string) error {
+func RunBash(commandString string) (output string, err error) {
 	return runCMD("bash", "-c", commandString)
 }
 
-func RunZsh(commandString string) error {
+func RunZsh(commandString string) (output string, err error) {
 	return runCMD("zsh", "-c", commandString)
 }
 
-func RunCMD(commandString string) error {
+func RunCMD(commandString string) (output string, err error) {
 	return RunSh(commandString)
 }

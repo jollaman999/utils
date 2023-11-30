@@ -1,7 +1,3 @@
-// Check iproute2 for Linux & Unix like systems
-
-//go:build !windows
-
 package syscheck
 
 import (

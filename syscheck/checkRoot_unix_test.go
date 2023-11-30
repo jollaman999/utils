@@ -1,7 +1,3 @@
-// Check root for Linux & Unix like systems
-
-//go:build !windows
-
 package syscheck
 
 import "testing"

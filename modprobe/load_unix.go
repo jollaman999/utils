@@ -1,3 +1,7 @@
+// Load kernel modules for Linux & Unix like systems
+
+//go:build !windows
+
 package modprobe
 
 import "pault.ag/go/modprobe"

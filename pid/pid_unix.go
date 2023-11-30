@@ -1,3 +1,7 @@
+// PID tool for Linux & Unix like systems
+
+//go:build !windows
+
 package pid
 
 import (

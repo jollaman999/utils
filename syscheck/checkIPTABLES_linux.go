@@ -1,3 +1,7 @@
+// Check iptables for Linux
+
+//go:build linux
+
 package syscheck
 
 import (

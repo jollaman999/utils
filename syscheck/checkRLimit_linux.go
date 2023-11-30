@@ -1,3 +1,7 @@
+// Increase RLimit for Linux
+
+//go:build linux
+
 package syscheck
 
 import "syscall"

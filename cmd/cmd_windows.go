@@ -5,21 +5,20 @@
 package cmd
 
 import (
-	"errors"
 	"os/exec"
 )
 
-func runCMD(name string, arg ...string) error {
+func runCMD(name string, arg ...string) (output string, err error) {
 	cmd := exec.Command(name, arg...)
-	output, err := cmd.CombinedOutput()
+	outputBytes, err := cmd.CombinedOutput()
 	if err != nil {
-		if len(output) == 0 {
-			output = []byte(err.Error())
+		if len(outputBytes) == 0 {
+			outputBytes = []byte(err.Error())
 		}
-		return errors.New(string(output))
+		return string(outputBytes), errors.New(string(outputBytes))
 	}
 
-	return nil
+	return string(outputBytes), nil
 }
 
 func RunPowerShell(commandString string) (output string, err error) {

@@ -22,10 +22,10 @@ func runCMD(name string, arg ...string) error {
 	return nil
 }
 
-func RunPowerShell(commandString string) error {
+func RunPowerShell(commandString string) (output string, err error) {
 	return runCMD("powershell.exe", "-Command", commandString)
 }
 
-func RunCMD(commandString string) error {
+func RunCMD(commandString string) (output string, err error) {
 	return runCMD("cmd.exe", "/c", commandString)
 }
